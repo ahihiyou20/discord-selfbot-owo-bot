@@ -1,0 +1,7 @@
+Current version: 1.0.0
+
+-Fixed Automatically Use Gems.
+-Downgrade Sleep Mode.
+-Added More Info
+-Fixed Some Bug.
+-Obfuscated main.py For Security Reasons.
