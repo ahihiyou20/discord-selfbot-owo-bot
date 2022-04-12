@@ -56,8 +56,7 @@ py -m pip install -r requirements.txt
 
 **You Need A Team (Army) And Some Gems Before Start Botting, That's Because This Bot cant' Build A Perfect Account From Zero Yet.**
 
-**Feel Free To Open Issue On Github Or The Support Discord Server**:
-https://discord.gg/3kTrhbBVQm
+**Feel Free To Open Issue On Github!**
 
 **Lastest version: See in version.txt**
 
