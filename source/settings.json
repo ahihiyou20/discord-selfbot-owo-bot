@@ -11,5 +11,6 @@
    "webhookping": "None",
    "daily": "YES",
    "stop": "NO",
-   "change": "NO"
+   "change": "NO",
+   "sell": "None"
 }
