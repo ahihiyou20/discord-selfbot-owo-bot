@@ -3,10 +3,6 @@ import json
 import os
 from sys import exit
 def menu():
- if os.name == 'nt':
-    import json
- else:
-    import simplejson as json
  file = open("settings.json", "r")
  data = json.load(file)
  file.close()
@@ -24,6 +20,7 @@ def menu():
  print(f'| [10] Change Daily Mode      |')
  print(f'| [11] Change Stop Time       |')
  print(f'| [12] Change Switch Channel  |')
+ print(f'| [13] Change Sell Mode       |')
  print('================================')
  choice = input("Enter Your Choice: ")
  if choice == "0":
@@ -40,6 +37,7 @@ def menu():
   daily(data,"True")
   stop(data,"True")
   change(data,"True")
+  sell(data,"True")
  if choice == "2":
   t(data,"False")
  if choice == "3":
@@ -62,6 +60,8 @@ def menu():
   stop(data,"False")
  if choice == "12":
   change(data,"False")
+ if choice == "13":
+  sell(data, "False")
 def t(data,all):
  data['token'] = input("Please Enter Your Account Token: ")
  file = open("settings.json", "w")
@@ -157,7 +157,6 @@ def stop(data,all):
  print('Successfully saved!')
  if not all == "True":
   menu()
-menu()
 def change(data,all):
  data['change'] = input("Toggle Automatically Switch Channel To Avoid Channel EXP Limit (YES/NO): ")
  file = open("settings.json", "w")
@@ -166,3 +165,21 @@ def change(data,all):
  print('Successfully saved!')
  if not all == "True":
   menu()
+def sell(data, all):
+ data['sell'] = input("Toggle Automatically Sell Animal (YES/NO): ")
+ if data['sell'].lower() != "no":
+  print("Animal Type: C, U, R, M... (Type \"all\" To Sell All Animals)")
+  print("C = Common, U = Uncommon, ect...")
+  data['sell'] = input("Enter Animal Type: ")
+  file = open("settings.json", "w")
+  json.dump(data, file)
+  file.close()
+ else:
+  data['sell'] = "None"
+  file = open("settings.json", "w")
+  json.dump(data, file)
+  file.close()
+ print('Successfully saved!')
+ if not all == "True":
+  menu()
+menu()
