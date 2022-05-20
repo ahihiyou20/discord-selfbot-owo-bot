@@ -1,1 +1,16 @@
-
+{
+   "token": "nothing",
+   "channel": "nothing",
+   "gm": "YES",
+   "sm": "NO",
+   "pm": "YES",
+   "em": "YES",
+   "allowedid": "None",
+   "prefix": ".",
+   "webhook": "None",
+   "webhookping": "None",
+   "daily": "YES",
+   "stop": "NO",
+   "change": "NO",
+   "sell": "None"
+}
