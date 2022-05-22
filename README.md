@@ -77,7 +77,7 @@ Start Your Selfbot
 
 #### How Much Money It Can Earn In One Day?
 
-Around 1.500.000 Cowoncys
+Around 1.500.000 Cowoncys With Mythical+ Gems
 
 #### Can This Selfbot Run Efficiency On New Accounts?
 
