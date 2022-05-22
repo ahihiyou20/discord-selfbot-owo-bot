@@ -1,7 +1,7 @@
-# discord-selfbot-owo-bot
 
-**Keep In Mind This Repository Is For Educational Purposes Only. Selfbot are against Discord's ToS and against OwO's Rules! Use It At Your Own Risk!**
+# Discord OwO Selfbot
 
+An Advanced OwO Selfbot Helps You To Earn Cowoncy Automatically!
 
 * ### [Download Lastest Release](https://github.com/ahihiyou20/discord-selfbot-owo-bot/tags)
 [![GitHub issues](https://img.shields.io/github/issues/ahihiyou20/discord-selfbot-owo-bot?label=Open%20%C4%B0ssues)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/issues)
@@ -9,57 +9,103 @@
 [![GitHub stars](https://img.shields.io/github/stars/ahihiyou20/discord-selfbot-owo-bot)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/stargazers)
 
 
-# How to setup?
 
-**Using Exe Methods:**
+## WARNING
 
-**Open Folder Named "main". You Will See A File Named "Auto.exe", Open It And Use Without Any Bonus Setup**
+#### This Project Is For Education Purpose! Selfbot are against Discord's ToS and against OwO's Rules! Use It At Your Own Risk!
 
-**Using Python Methods:**
 
-**Open Folder Named "source". Open A Cmd And Type:**
+## Authors
 
+- [@ahihiyou20](https://www.github.com/ahihiyou20)
+
+
+## Features
+
+- Automatically Stop If Captcha Is Asked And Sent Through Discord Webhook
+- Automatically Use Gems
+- Automatically Send Random Quotes To Increase EXP
+- Automatically Change Channel
+- Automatically Pray
+- Automatically Stop After A Period Time
+- Automatically Send Hunt And Battle
+- Automatically Sell Animals For Cowoncy
+- Automatically Claim Daily
+- Cross platform (Windows, Linux, ...)
+- And MORE...!
+## Installation
+
+Install discord-selfbot-owo-bot with Python and Github
+
+Clone The Project
+
+```bash
+  git clone https://github.com/ahihiyou20/discord-selfbot-owo-bot.git
 ```
-py -m pip install -r requirements.txt
+
+Go To The Project Directory
+
+```bash
+  cd discord-selfbot-owo-bot/source
 ```
 
-**Then Run main.py, That's All :)**
+Install Dependencies
 
-**Or Just Normally Run main.py And It Will Automatically Install Requirements Package For You**
+```bash
+  python -m pip install -r requirements.txt
+```
 
-**Then Run "main.py", Enter Your Token And Channel ID And Other Settings. If You Don't Know How To Get Channel ID: https://support.discord.com/hc/en-us/articles/206346498-Kullan%C4%B1c%C4%B1-Sunucu-Mesaj-ID-sini-Nerden-Bulurum-**
+Start Your Own Selfbot
 
-**You Can Use This Bot On Windows, Linux And Android With "Termux" App.**
+```bash
+  python main.py
+```
 
-**Install Termux If You Want To Use This Bot On Android And Use Those Command ^^**:
+Or
 
-**Termux Website: https://termux.com/**
+```bash
+ cd discord-selfbot-owo-bot/main
+```
+
+Start Your Selfbot
+
+```bash
+ Auto.exe
+```
+    
+## FAQ
+
+#### How Much Money It Can Earn In One Day?
+
+Around 1.500.000 Cowoncys
+
+#### Can This Selfbot Run Efficiency On New Accounts?
+
+Nope, This Selfbot Can't Run Efficiency On New Accounts. You Need Atleast A Battle Team And Some Gems First Because This Selfbot Can't Build A Perfect Account From Zero.
+
+#### Can I Get Banned From OwO?
+
+Yes, Only If You Don't Solve The Captcha From OwO. This Selfbot Will Automatically If Captcha Is Asked. But You Still Need To Solve It
+
+#### Can I Run It With My Android Phone?
+
+Yes, Termux Apps Can Run Python Codes And Others Programming Language Like Git Or Javascript. You Can Use It To Install The Selfbot With The Given Tutorial. More Information: https://termux.com/
+
+Have More Questions? Feel Free To Open Issues Or Contact Me On Discord: Mai Sakurajima#0348 
+## License
+
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 
-**All Available Settings:**
+## Screenshots
 
-**> SM (YES or NO) = Sometimes Your Bot Can Sleep To Avoid OwO's Captcha If You Turn This On.**
-
-**> GM (YES or NO) = If You Turn This On Then Your Bot Will Automatically Use Strongest Gems.**
-
-**> PM (YES or NO) = Enable This Will Result Your Bot Automatically Send Pray.**
-
-**> EM (YES or NO) = Send Random Text Sometimes To Level Up If You Turn It On.**
-
-**> Sent Captcha Alert To Discord Webhook And Ping The User**
+![Preview](https://cdn.discordapp.com/attachments/963047907030892558/977820177171382312/Screenshot_20220522-132751_Termux.jpg)
 
 
-**And Much More Features**
+## Contributing
 
+Contributions are always welcome!
 
-**Your Account Must Have A Valid OwO Profile Already, This Bot Can't Run Efficiency On New Generated Accounts.**
+To Get Started, Create An Issue And I Will Reply As Soon As I Can!
 
-**You Need A Team (Army) And Some Gems Before Start Botting, That's Because This Bot cant' Build A Perfect Account From Zero Yet.**
-
-**Feel Free To Open Issue On Github!**
-
-**Lastest version: See in version.txt**
-
-**Note: This Repository Is Under GNU General Public License v3.0! Please Don't Use This Repository To Sell Or Else I Will Kill You.**
-
-**Note 2: This Repository Is For Educational Purposes Only. Selfbot are against Discord's ToS and against OwO's Rules! Use It At Your Own Risk!**
+Thanks.
