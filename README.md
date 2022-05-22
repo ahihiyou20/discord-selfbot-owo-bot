@@ -100,6 +100,7 @@ Have More Questions? Feel Free To Open Issues Or Contact Me On Discord: Mai Saku
 ## Screenshots
 
 ![Preview](https://cdn.discordapp.com/attachments/963047907030892558/977820177171382312/Screenshot_20220522-132751_Termux.jpg)
+![Preview 2](https://cdn.discordapp.com/attachments/915258272179707964/977823708754366474/Screenshot_20220522-134105_Termux.jpg)
 
 
 ## Contributing
