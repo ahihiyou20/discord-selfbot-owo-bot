@@ -104,7 +104,7 @@ Have More Questions? Feel Free To Open Issues Or Contact Me On Discord: Mai Saku
 
 ## Contributing
 
-Contributions are always welcome!
+Contributions Are Always elcome!
 
 To Get Started, Create An Issue And I Will Reply As Soon As I Can!
 
