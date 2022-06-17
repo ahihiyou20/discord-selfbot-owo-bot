@@ -7,4 +7,4 @@ def install():
     python = sys.executable
     subprocess.check_call([python, '-m', 'pip', 'install', '-r', 'requirements.txt'])
     print("Successfully Installed Requirements Package! You're Good To Go")
-    time.sleep(2) 
+    time.sleep(2)
