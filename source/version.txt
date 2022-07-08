@@ -1,4 +1,4 @@
-Current version: 1.0.1
+Current version: 1.0.2
 
 -Upgraded Check Token
 -Added Automatically Sovle Captcha Using API And AI
