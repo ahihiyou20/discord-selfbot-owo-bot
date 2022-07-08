@@ -1,7 +1,4 @@
 Current version: 1.0.1
 
--Upgraded Selfbot Commands So It Gonna Save Your Settings Into settings.json.
--Added Automatically Sell Animals
--Upgraded setup.py (Work properly now)
--Main.py Are No Longer Obfuscate.
--Fix bugs
+-Upgraded Check Token
+-Added Automatically Sovle Captcha Using API And AI
