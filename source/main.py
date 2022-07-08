@@ -8,6 +8,7 @@ import atexit
 from multiprocessing import Process, Pool
 import random
 import re
+import base64
 try:
  from inputimeout import inputimeout,TimeoutOccurred
 except:
@@ -35,7 +36,7 @@ print("""\
 ╚█████╔╝░░╚██╔╝░╚██╔╝░╚█████╔╝  ██████╔╝███████╗███████╗██║░░░░░  ██████╦╝╚█████╔╝░░░██║░░░
 ░╚════╝░░░░╚═╝░░░╚═╝░░░╚════╝░  ╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
 
-**Version: 1.0.1**""")
+**Version: 1.0.2**""")
 print("Alright! If You See Someone Selling This Code Then He/She Is Scamming [READ INFO]")
 wbm=[13,16]
 class client:
@@ -47,7 +48,7 @@ class client:
   totalcmd = 0
   totaltext = 0
   stopped = False
-  recentversion = "1.0.1"
+  recentversion = "1.0.2"
   wait_time_daily = 60
   channel2 = []
   class color:
@@ -76,24 +77,13 @@ class client:
         stop = data["stop"]
         change = data['change']
         sell = data['sell']
+        solve = data['solve']
   if data["token"] and data["channel"] == 'nothing':
    print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please Enter Information To Continue")
    time.sleep(2)
    from newdata import menu
    menu()
    os.execl(executable, executable, *argv)
-  head = {'Authorization': str(token)}
-  response = requests.get('https://discordapp.com/api/v6/users/@me', headers=head)
-  if response.status_code == 200:
-    pass
-  elif response.status_code == 429:
-    print(f"{color.fail}[ERROR]{color.reset} Too Many Requests! Try Again Later.")
-    time.sleep(2)
-    raise SystemExit
-  elif response.status_code == 404:
-    print(f"{color.fail}[ERROR]{color.reset} Invalid Token")
-    time.sleep(2)
-    raise SystemExit
   response = requests.get("https://api.github.com/repos/ahihiyou20/discord-selfbot-owo-bot/releases/latest")
   if recentversion in response.json()["name"]:
     print(f"{color.warning}Checking Update... {color.reset}")
@@ -163,6 +153,10 @@ else:
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
 bot = discum.Client(token=client.token, log=False)
+if False in bot.checkToken(client.token):
+  print(f"{client.color.fail}[ERROR]{client.color.reset} Invalid Token")
+  time.sleep(2)
+  raise SystemExit
 @bot.gateway.command
 def on_ready(resp):
     if resp.event.ready_supplemental: #ready_supplemental is sent after ready
@@ -188,33 +182,33 @@ def security(resp):
    bot.gateway.close()
 @bot.gateway.command
 def issuechecker(resp):
+ def solve(image_url):
+  img_data = requests.get(image_url).content
+  with open('captcha.png', 'wb') as handler:
+   handler.write(img_data)
+  with open('captcha.png', "rb") as image_file:
+   encoded_string = base64.b64encode(image_file.read())
+  data = { 'userid':'hoanghaianh', 'apikey':'5JzPnvYKF7iyHGIBYBXG', 'data': str(encoded_string)[2:-1], 'case': 'mixed'}
+  r = requests.post(url = 'https://api.apitruecaptcha.org/one/gettext', json = data)
+  j = json.loads(r.text)
+  print(f"{client.color.okcyan} [INFO] {client.color.reset}Solved Captcha [Code: {j['result']}")
+  bot.sendMessage(client.solve, j['result'])
  if resp.event.message:
    m = resp.parsed.auto()
    if m['channel_id'] == client.channel and client.stopped != True:
-    if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
+    if m['author']['id'] == '644856987300921344' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
-       return "captcha"
-     if '(2/5)' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (2/5)')
-       return "captcha"
-     if '(3/5)' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (3/5)')
-       return "captcha"
-     if '(4/5)' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (4/5)')
-       return "captcha"
-     if '(5/5)' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (5/5)')
+       if client.solve.lower() != "no":
+        solve(m['attachments'][0]['url'])
        return "captcha"
      if 'banned' in m['content'].lower():
        print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
        return "captcha"
      if 'complete your captcha to verify that you are human!'  in m['content']:
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
-       return "captcha"
-     if 'DM' in m['content'].lower():
-       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+       if client.solve.lower() != "no":
+        solve(m['attachments'][0]['url'])
        return "captcha"
      def change_channel():
        if client.change.lower() == "yes":
