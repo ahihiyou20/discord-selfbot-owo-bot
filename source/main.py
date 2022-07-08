@@ -196,7 +196,7 @@ def issuechecker(resp):
  if resp.event.message:
    m = resp.parsed.auto()
    if m['channel_id'] == client.channel and client.stopped != True:
-    if m['author']['id'] == '644856987300921344' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
+    if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
        if client.solve.lower() != "no":
