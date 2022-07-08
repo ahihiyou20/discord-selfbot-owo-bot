@@ -12,5 +12,6 @@
    "daily": "YES",
    "stop": "NO",
    "change": "NO",
-   "sell": "None"
+   "sell": "None",
+   "solve": "NO
 }
