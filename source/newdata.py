@@ -21,6 +21,7 @@ def menu():
  print(f'| [11] Change Stop Time       |')
  print(f'| [12] Change Switch Channel  |')
  print(f'| [13] Change Sell Mode       |')
+ print(f'| [14] Change Solve Captcha   |')
  print('================================')
  choice = input("Enter Your Choice: ")
  if choice == "0":
@@ -38,6 +39,7 @@ def menu():
   stop(data,"True")
   change(data,"True")
   sell(data,"True")
+  solve(data,"True")
  if choice == "2":
   t(data,"False")
  if choice == "3":
@@ -62,6 +64,8 @@ def menu():
   change(data,"False")
  if choice == "13":
   sell(data, "False")
+ if choice == "14":
+  solve(data, "False")
 def t(data,all):
  data['token'] = input("Please Enter Your Account Token: ")
  file = open("settings.json", "w")
@@ -176,6 +180,17 @@ def sell(data, all):
   file.close()
  else:
   data['sell'] = "None"
+  file = open("settings.json", "w")
+  json.dump(data, file)
+  file.close()
+ print('Successfully saved!')
+ if not all == "True":
+  menu()
+def solve(data, all):
+ data['solve'] = input("Toggle Automatically Solve Captcha With AI (YES/NO): ")
+ if data['solve'].lower() != "no":
+  print("If You Don't Know How To Get DMs Channel ID Then Look For A Video On YouTube Because DMs Channel ID Is Not Similar To Normal Channel")
+  data['solve'] = input("Enter OwO bot's DMs Channel ID: ")
   file = open("settings.json", "w")
   json.dump(data, file)
   file.close()
