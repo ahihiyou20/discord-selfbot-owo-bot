@@ -191,24 +191,30 @@ def issuechecker(resp):
   data = { 'userid':'hoanghaianh', 'apikey':'5JzPnvYKF7iyHGIBYBXG', 'data': str(encoded_string)[2:-1], 'case': 'mixed'}
   r = requests.post(url = 'https://api.apitruecaptcha.org/one/gettext', json = data)
   j = json.loads(r.text)
-  print(f"{client.color.okcyan} [INFO] {client.color.reset}Solved Captcha [Code: {j['result']}")
+  print(f"{client.color.okcyan}[INFO] {client.color.reset}Solved Captcha [Code: {j['result']}]")
   bot.sendMessage(client.solve, j['result'])
  if resp.event.message:
    m = resp.parsed.auto()
-   if m['channel_id'] == client.channel and client.stopped != True:
+   if m['channel_id'] == client.channel or m['channel_id'] == client.solve and client.stopped != True:
     if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
-     if 'captcha' in m['content'].lower():
+     if 'solving the captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
        if client.solve.lower() != "no":
-        solve(m['attachments'][0]['url'])
+        try:
+         solve(m['attachments'][0]['url'])
+        except:
+         pass
        return "captcha"
      if 'banned' in m['content'].lower():
        print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
        return "captcha"
-     if 'complete your captcha to verify that you are human!'  in m['content']:
+     if 'Are you a real human'  in m['content']:
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
        if client.solve.lower() != "no":
-        solve(m['attachments'][0]['url'])
+        try:
+         solve(m['attachments'][0]['url'])
+        except:
+         pass
        return "captcha"
      def change_channel():
        if client.change.lower() == "yes":
