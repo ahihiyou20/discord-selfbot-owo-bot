@@ -1,4 +1,4 @@
-Current version: 1.0.2
+Current version: 1.0.3
 
--Upgraded Check Token
--Added Automatically Sovle Captcha Using API And AI
+-Upgraded Automatically Solve Captcha So That You Don't Need To Enter OwO DM's ID.
+-Change Some Client Information (build_num, random_user_agent)
