@@ -152,7 +152,10 @@ else:
  os.execl(executable, executable, *argv)
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
-bot = discum.Client(token=client.token, log=False)
+bot = discum.Client(token=client.token, build_num=5, log={'console': False, 'file': 'logs.txt', 'encoding': 'utf-8'}, user_agent=[
+ 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36/PAsMWa7l-11',
+ 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 YaBrowser/20.8.3.115 Yowser/2.5 Safari/537.36',
+ 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.7.2) Gecko/20100101 / Firefox/60.7.2'])
 if False in bot.checkToken(client.token):
   print(f"{client.color.fail}[ERROR]{client.color.reset} Invalid Token")
   time.sleep(2)
@@ -182,6 +185,18 @@ def security(resp):
    bot.gateway.close()
 @bot.gateway.command
 def issuechecker(resp):
+ try:
+  if client.solve.lower() != "no":
+   i = 0
+   length = len(bot.gateway.session.DMIDs)
+   while i < length:
+    if '408785106942164992' in bot.gateway.session.DMs[bot.gateway.session.DMIDs[i]]['recipients']:
+     dmsid = bot.gateway.session.DMIDs[i]
+     i = length
+    else:
+     i += 1
+ except KeyError:
+  pass
  def solve(image_url):
   img_data = requests.get(image_url).content
   with open('captcha.png', 'wb') as handler:
@@ -192,29 +207,23 @@ def issuechecker(resp):
   r = requests.post(url = 'https://api.apitruecaptcha.org/one/gettext', json = data)
   j = json.loads(r.text)
   print(f"{client.color.okcyan}[INFO] {client.color.reset}Solved Captcha [Code: {j['result']}]")
-  bot.sendMessage(client.solve, j['result'])
+  bot.sendMessage(dmsid, j['result'])
  if resp.event.message:
    m = resp.parsed.auto()
-   if m['channel_id'] == client.channel or m['channel_id'] == client.solve and client.stopped != True:
+   if m['channel_id'] == client.channel or m['channel_id'] == dmsid if client.solve.lower() != "no" else False and client.stopped != True:
     if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'solving the captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
        if client.solve.lower() != "no":
-        try:
          solve(m['attachments'][0]['url'])
-        except:
-         pass
        return "captcha"
      if 'banned' in m['content'].lower():
        print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
        return "captcha"
-     if 'Are you a real human'  in m['content']:
+     if 'are you a real human'  in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
        if client.solve.lower() != "no":
-        try:
          solve(m['attachments'][0]['url'])
-        except:
-         pass
        return "captcha"
      def change_channel():
        if client.change.lower() == "yes":
@@ -402,7 +411,7 @@ def othercommands(resp):
      bot.gateway.removeCommand(othercommands)
      return
     if "{}send".format(prefix) in m['content'].lower():
-     message = m['content'].replace(f'{prefix}send', '')
+     message = m['content'].replace(f'{prefix}send ', '')
      bot.sendMessage(str(m['channel_id']), message)
      print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} {message}")
     if "{}restart".format(prefix) in m['content'].lower():
