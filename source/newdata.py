@@ -188,12 +188,9 @@ def sell(data, all):
   menu()
 def solve(data, all):
  data['solve'] = input("Toggle Automatically Solve Captcha With AI (YES/NO): ")
- if data['solve'].lower() != "no":
-  print("If You Don't Know How To Get DMs Channel ID Then Look For A Video On YouTube Because DMs Channel ID Is Not Similar To Normal Channel")
-  data['solve'] = input("Enter OwO bot's DMs Channel ID: ")
-  file = open("settings.json", "w")
-  json.dump(data, file)
-  file.close()
+ file = open("settings.json", "w")
+ json.dump(data, file)
+ file.close()
  print('Successfully saved!')
  if not all == "True":
   menu()
