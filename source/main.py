@@ -50,7 +50,6 @@ class client:
   stopped = False
   recentversion = "1.0.3"
   wait_time_daily = 60
-  channel2 = []
   class color:
     purple = '\033[95m'
     okblue = '\033[94m'
@@ -225,27 +224,39 @@ def issuechecker(resp):
      if 'banned' in m['content'].lower():
        print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} Your Account Have Been Banned From OwO Bot Please Open An Issue On The Support Discord server')
        return "captcha"
-     if 'are you a real human'  in m['content'].lower():
+     if 'are you a real human' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
        if client.solve.lower() != "no":
          solve(m['attachments'][0]['url'])
        return "captcha"
- def change_channel():
-    if client.change.lower() == "yes":
-      client.channel2 = []
-      guild = bot.gateway.session.guild(m['guild_id']).channels
-      channel = guild.keys()
-      channel2 = random.choice(list(channel))
-      try:
-       if guild[channel2]['type'] == "guild_text":
-        client.channel2.append(channel2)
-        client.channel2.append(guild[channel2]['name'])
-       else:
-        change_channel()
-      except RecursionError:
-        client.channel2.append(channel2)
-        client.channel2.append(guild[channel2]['name'])
- change_channel()
+ def change_channel(guilds, guildIDs):
+       if client.change.lower() == "yes":
+         global channel2
+         channel2 = []
+         i = 0
+         length = len(guildIDs)
+         while length > i:
+          if client.channel in guilds[guildIDs[i]]['channels']:
+           guild = guildIDs[i]
+           i = length
+          else:
+           i += 1
+         guild = bot.gateway.session.guild(guild).channels
+         channel = guild.keys()
+         channel = random.choice(list(channel))
+         try:
+          if guild[channel]['type'] == "guild_text":
+            channel2.append(channel)
+            channel2.append(guild[channel]['name'])
+          else:
+            change_channel(guilds, guildIDs)
+         except RecursionError:
+            channel2.append(channel)
+            channel2.append(guild[channel]['name'])
+ try:
+  change_channel(bot.gateway.session.guilds, bot.gateway.session.guildIDs)
+ except KeyError:
+  pass
 def runner():
         global wbm
         command=random.choice(client.commands)
@@ -542,8 +553,8 @@ def loopie(resp):
       if client.change.lower() == "yes" and client.stopped != True:
         if time.time() - change > random.randint(600,1500):
          change=time.time()
-         print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Changed Channel To: {client.channel2[1]}")
-         client.channel = client.channel2[0]
+         print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Changed Channel To: {channel2[1]}")
+         client.channel = channel2[0]
       if client.sell != "None" and client.stopped != True:
         if time.time() - selltime > random.randint(600,1000):
          selltime=time.time()
