@@ -31,6 +31,7 @@ An Advanced OwO Selfbot Helps You To Earn Cowoncy Automatically!
 - Automatically Send Hunt And Battle
 - Automatically Sell Animals For Cowoncy
 - Automatically Claim Daily
+- Automatically Solve Captcha (Beta)
 - Cross platform (Windows, Linux, ...)
 - And MORE...!
 ## Installation
