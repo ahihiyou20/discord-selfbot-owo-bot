@@ -1,4 +1,5 @@
-Current version: 1.0.3
+Current version: 1.0.4
 
--Upgraded Automatically Solve Captcha So That You Don't Need To Enter OwO DM's ID.
--Change Some Client Information (build_num, random_user_agent)
+-Upgraded Automatically Solve Captcha
+-The Console Won't Close Automatically After Stop Anymore
+-Fix Some Issues
