@@ -36,7 +36,7 @@ print("""\
 ╚█████╔╝░░╚██╔╝░╚██╔╝░╚█████╔╝  ██████╔╝███████╗███████╗██║░░░░░  ██████╦╝╚█████╔╝░░░██║░░░
 ░╚════╝░░░░╚═╝░░░╚═╝░░░╚════╝░  ╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
 
-**Version: 1.0.3**""")
+**Version: 1.0.4**""")
 print("Alright! If You See Someone Selling This Code Then He/She Is Scamming [READ INFO]")
 wbm=[13,16]
 class client:
@@ -48,7 +48,7 @@ class client:
   totalcmd = 0
   totaltext = 0
   stopped = False
-  recentversion = "1.0.3"
+  recentversion = "1.0.4"
   wait_time_daily = 60
   class color:
     purple = '\033[95m'
@@ -173,15 +173,15 @@ def security(resp):
     if client.webhookping != 'None':
      sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> I Found A Captcha In Channel: <#{}>'.format(client.webhookping,client.channel))
      response = sentwebhook.execute()
-     bot.gateway.close()
+     bot.switchAccount('NzI1MzEyMTM5MTkwODYxODc1.YcmgMQ.utL5QNIm9XSdRUDOuhkrY39IGcD')
     else:
      sentwebhook = DiscordWebhook(url=client.webhook, content='<@{}> <@{}> I Found A Captcha In Channel: <#{}>'.format(user['id'],client.allowedid,client.channel))
      response = sentwebhook.execute()
-     bot.gateway.close()
+     bot.switchAccount('NzI1MzEyMTM5MTkwODYxODc1.YcmgMQ.utL5QNIm9XSdRUDOuhkrY39IGcD')
  if client.webhook == 'None':
   if issuechecker(resp) == "captcha":
    client.stopped = True
-   bot.gateway.close()
+   bot.switchAccount('NzI1MzEyMTM5MTkwODYxODc1.YcmgMQ.utL5QNIm9XSdRUDOuhkrY39IGcD')
 @bot.gateway.command
 def issuechecker(resp):
  dmsid = None
@@ -203,15 +203,16 @@ def issuechecker(resp):
    handler.write(img_data)
   with open('captcha.png', "rb") as image_file:
    encoded_string = base64.b64encode(image_file.read())
+  userid = random.choice(['hoanghaianh', 'ahihiyou20'])
   data = {
-   'userid': random.choice(['hoanghaianh', 'ahihiyou20']),
-   'apikey': '5JzPnvYKF7iyHGIBYBXG' if 'userid' == 'hoanghaianh' else 'EylMgbLUe0v4Jxi69fTN',
+   'userid': userid,
+   'apikey': '5JzPnvYKF7iyHGIBYBXG' if userid == 'hoanghaianh' else 'EylMgbLUe0v4Jxi69fTN',
    'data': str(encoded_string)[2:-1],
    'case': 'mixed'}
   r = requests.post(url = 'https://api.apitruecaptcha.org/one/gettext', json = data)
   j = json.loads(r.text)
   print(f"{client.color.okcyan}[INFO] {client.color.reset}Solved Captcha [Code: {j['result']}]")
-  bot.sendMessage(dmsid, j['result'])
+  return j['result']
  if resp.event.message:
    m = resp.parsed.auto()
    if m['channel_id'] == client.channel or m['channel_id'] == dmsid and client.stopped != True:
@@ -219,7 +220,7 @@ def issuechecker(resp):
      if 'solving the captcha' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
        if client.solve.lower() != "no":
-         solve(m['attachments'][0]['url'])
+         bot.sendMessage(dmsid, solve(m['attachments'][0]['url']))
        return "captcha"
      if 'banned' in m['content'].lower():
        print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} Your Account Have Been Banned From OwO Bot Please Open An Issue On The Support Discord server')
@@ -227,8 +228,35 @@ def issuechecker(resp):
      if 'are you a real human' in m['content'].lower():
        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
        if client.solve.lower() != "no":
-         solve(m['attachments'][0]['url'])
+         bot.sendMessage(dmsid, solve(m['attachments'][0]['url']))
        return "captcha"
+     if any(captcha in m['content'].lower() for captcha in ['(1/5)', '(2/5)', '(3/5)', '(4/5)', '(5/5)']):
+       msgs=bot.getMessages(dmsid)
+       msgs=json.loads(msgs.text)
+       while type(msgs) is dict:
+        msgs=bot.getMessages(dmsid)
+        msgs=json.loads(msgs.text)
+       if msgs[0]['author']['id']=='408785106942164992' and 'are you a real human' in msgs[0]['content'].lower() and msgs[0]['attachments'] != []:
+        print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
+        if client.solve.lower() != "no":
+         bot.sendMessage(dmsid, solve(msgs[0]['attachments'][0]['url']))
+        return "captcha"
+       msgs=bot.getMessages(str(client.channel), num=10)
+       msgs=json.loads(msgs.text)
+       i = 0
+       length = len(msgs)
+       while i < length:
+        if msgs[i]['author']['id']=='408785106942164992' and 'solving the captcha' in msgs[i]['content'].lower():
+         print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
+         if client.solve.lower() != "no":
+          bot.sendMessage(dmsid, solve(msgs[i]['attachments'][0]['url']))
+         i = length
+         return "captcha"
+        else:
+         i += 1
+         if i == length:
+          print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} ACTION REQUİRED')
+          return "captcha"
  def change_channel(guilds, guildIDs):
        if client.change.lower() == "yes":
          global channel2
