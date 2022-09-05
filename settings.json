@@ -1,0 +1,31 @@
+{
+    "token": "nothing",
+    "channel": "nothing",
+    "gm": "YES",
+    "sm": "NO",
+    "pm": "YES",
+    "em": {
+        "text": "YES",
+        "owo": "YES"
+    },
+    "webhook": {
+        "link": "None",
+        "ping": "None"
+    },
+    "sbcommands": {
+        "enable": "YES",
+        "prefix": ".",
+        "allowedid": "None"
+    },
+    "daily": "YES",
+    "stop": "NO",
+    "sell": {
+        "enable": "NO",
+        "types": "all"
+    },
+    "solve": {
+        "enable": "YES",
+        "server": "3"
+    },
+    "change": "YES"
+}
