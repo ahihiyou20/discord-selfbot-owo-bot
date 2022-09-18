@@ -5,6 +5,8 @@ from menu import UI
 from time import sleep
 from re import findall
 from inputimeout import TimeoutOccurred, inputimeout
+from webbrowser import open as open_browser
+from os import getcwd
 import json
 ui = UI()
 class data:
@@ -21,7 +23,7 @@ class data:
 		self.stopped = False
 		self.version = int(''.join(map(str, Version)))
 		self.wait_time_daily = 60
-		with open('settings.json', "r") as file:
+		with open(f'{getcwd()}/settings.json', "r") as file:
 			data = json.load(file)
 			self.token = data["token"]
 			self.channel = data["channel"]
@@ -37,7 +39,7 @@ class data:
 			self.solve = data['solve']
 			self.change = data['change']
 	def Version(self):
-		response = get("https://raw.githubusercontent.com/ahihiyou20/discord-selfbot-owo-bot/development/source/src/version.py")
+		response = get("https://raw.githubusercontent.com/ahihiyou20/discord-selfbot-owo-bot/main/version.py")
 		version = response.text
 		version = findall(r'\b\d+\b', version)
 		return int(''.join(version))
@@ -56,15 +58,20 @@ class data:
 		ui.slowPrinting(f"{color.warning}Checking Update... {color.reset}")
 		sleep(0.5)
 		if self.version >= version:
-			ui.slowPrinting(f"{color.okgreen}No Update Available {color.reset}")
+			ui.slowPrinting(f"{color.okgreen}You're Using The Latest Version {color.reset}")
+			sleep(2)
 		elif self.version < version:
 			sleep(0.5)
-			ui.slowPrinting(f"{color.warning}Update Available {color.reset}")
+			ui.slowPrinting(f"{color.warning}You're Using An Out-dated Version. Please Install Latest Version On Github{color.reset}")
 			ui.slowPrinting("Automatically Pick Option [NO] In 10 Seconds.")
-		try:
-			choice = inputimeout(prompt=f"{color.warning}Do You Want To Update (YES/NO): {color.reset}", timeout=10)
-		except TimeoutOccurred:
-			choice = "NO"
-		if choice.lower() == "yes":
-			import update
-a = data()
+			try:
+				choice = inputimeout(prompt=f"{color.warning}Do You Want To Update (YES/NO): {color.reset}", timeout=10)
+			except TimeoutOccurred:
+				choice = "NO"
+			if choice.lower() == "yes":
+				if open_browser("https://github.com/ahihiyou20/discord-selfbot-owo-bot/archive/refs/heads/main.zip"):
+					ui.slowPrinting(f"{color.okgreen}Installed Latest Version In Browser{color.reset}")
+				else:
+					ui.slowPrinting(f"{color.fail}Failed To Download Latest Version In Browser {color.reset}")
+				sleep(2)
+				raise SystemExit
