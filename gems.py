@@ -1,12 +1,10 @@
 from data import data
 from time import sleep, strftime, localtime
 from color import color
-from colorama import init
 from menu import UI
 from re import findall, sub
 client = data()
 ui= UI()
-init()
 class gems:
 	def __init__(self, bot):
 		self.bot = bot
@@ -24,7 +22,6 @@ class gems:
 					code[code.index(i)] = 1
 				elif i == 4:
 					code[code.index(i)] = 2
-		ui.slowPrinting(f"Input Code: {gemslist}")
 		switchCode(gemslist)
 		self.bot.typingAction(str(client.channel))
 		sleep(3)
@@ -71,8 +68,6 @@ class gems:
 				self.available.append(3)
 			if tier[2]:
 				self.available.append(4)
-			ui.slowPrinting(f"Output Available: {self.available}")
-			ui.slowPrinting(f"Output Code: {gemslist}")
 			use = []
 			for level in gemslist:
 					if not len(tier[level]) == 0:
@@ -94,7 +89,6 @@ class gems:
 				if i == len(m) - 1:
 					return
 			gems = findall(self.regex, m['content'])
-			ui.slowPrinting(f"Output Regex: {gems}")
 			usegems = list(self.gemtypes)
 			usegems2 = []
 			if len(gems) < 3:
@@ -104,6 +98,5 @@ class gems:
 				for i in usegems:
 					if int(i) in self.available:
 						usegems2.append(i)
-				ui.slowPrinting(f"Input Self Available: {self.available}")
 				if usegems2:
 					self.useGems(usegems2)
