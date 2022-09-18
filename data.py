@@ -38,6 +38,7 @@ class data:
 			self.sell = data['sell']
 			self.solve = data['solve']
 			self.change = data['change']
+			self.dmsID = None
 	def Version(self):
 		response = get("https://raw.githubusercontent.com/ahihiyou20/discord-selfbot-owo-bot/main/version.py")
 		version = response.text
