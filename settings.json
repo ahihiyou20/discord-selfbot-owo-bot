@@ -1,31 +1,31 @@
 {
     "token": "nothing",
     "channel": "nothing",
-    "gm": "YES",
-    "sm": "NO",
-    "pm": "YES",
+    "gm": true,
+    "sm": false,
+    "pm": true,
     "em": {
-        "text": "YES",
-        "owo": "YES"
+        "text": true,
+        "owo": false
     },
     "webhook": {
-        "link": "None",
-        "ping": "None"
+        "link": null,
+        "ping": null
     },
     "sbcommands": {
-        "enable": "YES",
+        "enable": true,
         "prefix": ".",
-        "allowedid": "None"
+        "allowedid": null
     },
-    "daily": "YES",
-    "stop": "NO",
+    "daily": true,
+    "stop": false,
     "sell": {
-        "enable": "NO",
+        "enable": true,
         "types": "all"
     },
     "solve": {
-        "enable": "YES",
-        "server": "3"
+        "enable": true,
+        "server": 1
     },
-    "change": "YES"
+    "change": false
 }
