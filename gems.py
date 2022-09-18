@@ -71,7 +71,7 @@ class gems:
 			use = []
 			for level in gemslist:
 					if not len(tier[level]) == 0:
-						use.append(str(m(tier[level])))
+						use.append(str(max(tier[level])))
 			if use:
 				sleep(5)
 				self.bot.sendMessage(str(client.channel), "owo use " + ' '.join(use))
