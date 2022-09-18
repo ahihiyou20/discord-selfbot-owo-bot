@@ -69,7 +69,7 @@ def main():
 		solve(data, False)
 	else:
 		ui.slowPrinting(f"{color.fail}[INFO] {color.reset}Invalid Choice")
-def t(data,all):
+def t(data, all):
  data['token'] = input("Please Enter Your Account Token: ")
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
@@ -77,7 +77,7 @@ def t(data,all):
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def c(data,all):
+def c(data, all):
  data['channel'] = input("Please Enter Your Channel ID: ")
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
@@ -85,81 +85,90 @@ def c(data,all):
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def pm(data,all):
+def pm(data, all):
  data['pm'] = input("Toggle Automatically Sending Pray (YES/NO): ")
+ data['pm'] = data['pm'].lower() == "yes"
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def gm(data,all):
+def gm(data, all):
  data['gm'] = input("Toggle Automatically Using Gems (YES/NO): ")
  file = open("settings.json", "w")
+ data['gm'] = data['gm'].lower() == "yes"
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def em(data,all):
+def em(data, all):
  data['em']['text'] = input("Toggle Automatically Sending Random Text To Level Up (YES/NO): ")
  if data['em']['text'].lower() == "yes":
  	data['em']['owo'] = input("\t +)Do You Want To Enable Automatically Sending \"OwO\" Also? (YES/NO): ")
+ data['em']['text'] = data['em']['text'].lower() == "yes"
+ data['em']['owo'] = data['em']['owo'].lower() == "yes"
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def sm(data,all):
+def sm(data, all):
  data['sm'] = input("Toggle Sleep Mode (YES/NO): ")
  file = open("settings.json", "w")
+ data['sm'] = data['sm'].lower() == "yes"
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def webhook(data,all):
+def webhook(data, all):
  data['webhook']['link'] = input("Toggle Discord Webhook (Enter Webhook Link, It'll Ping You If OwO Ask For Captcha. Otherwise Enter \"None\"): ")
- if data['webhook']['link'] != "None":
+ if data['webhook']['link'].lower() != "none":
   data['webhook']['ping'] = input("\t +)Do You Want To Ping A Specified User When OwO Asked Captcha? If Yes Enter User ID. Otherwise Enter \"None\": ")
  file = open("settings.json", "w")
+ if data['webhook']['link'].lower() == "none":
+  data['webhook']['link'] = None
+ if data['webhook']['ping'] and data['webhook']['ping'].lower() == "none":
+  data['webhook']['ping'] = None
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def oc(data,all):
+def oc(data, all):
  data['sbcommands']['enable'] = input("Toggle Selfbot Commands, You Can Control Your Selfbot Using Commands (YES/NO): ")
  if data['sbcommands']['enable'].lower() == "yes":
   data['sbcommands']['prefix'] = input("\t +)Enter Your Selfbot Prefix: ")
   data['sbcommands']['allowedid'] = input("\t +)Do You Want Allow An User To Use Your Selfbot Commands? If Yes Enter The Account ID, Otherwise Enter \"None\": ")
   ui.slowPrinting("Great! You Can View Selfbot Commands At Option [3] Info At The Main Menu!")
   sleep(1)
- else:
-  data['sbcommands']['enable'] = "NO"
+ data['sbcommands']['enable'] = data['sbcommands']['enable'].lower() == "yes"
+ if data['sbcommands']['allowedid'] and data['sbcommands']['allowedid'].lower() == "none":
+  data['sbcommands']['allowedid'] = None
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def daily(data,all):
+def daily(data, all):
  data['daily'] = input("Toggle Automatically Claiming Daily (YES/NO): ")
- if data['daily'].lower() == "no":
-  data['daily'] = "None"
+ data['daily'] = data['daily'].lower() == "yes"
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
-def stop(data,all):
+def stop(data, all):
  data['stop'] = input("Toggle Stop After A Specifice Time (YES/NO): ")
  if data['stop'].lower() == "yes":
   data['stop'] = input("Enter Stop Time (Seconds): ")
  else:
-  data['stop'] = "NO"
+  data['stop'] = False
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
@@ -175,19 +184,24 @@ def sell(data, all):
   file = open("settings.json", "w")
   dump(data, file, indent = 4)
   file.close()
- else:
-  data['sell']['enable'] = "NO"
-  file = open("settings.json", "w")
-  dump(data, file, indent = 4)
-  file.close()
+ data['sell']['enable'] = data['sell']['enable'].lower() == "yes"
+ file = open("settings.json", "w")
+ dump(data, file, indent = 4)
+ file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
  if not all:
   main()
 def solve(data, all):
  data['solve']['enable'] = input("Toggle Automatically Captcha Solving By Human (YES/NO): ")
  if data['solve']['enable'].lower() == "yes":
- 	ui.slowPrinting("Available Captcha Solving Server:\n1: https://autofarmsupport.tk\n2: https://afbot.dev\n3: Any Available Server")
- 	data['solve']['server'] = input("Which Server Do You Want To Use (1/2/3): ")
+ 	ui.slowPrinting("Available Captcha Solving Server:\n1: https://autofarmsupport.tk\n2: https://afbot.dev")
+ 	data['solve']['server'] = input("Which Server Do You Want To Use (1/2): ")
+ 	if data['solve']['server'].isdigit():
+ 		data['solve']['server'] = int(data['solve']['server'])
+ 	else:
+ 		ui.slowPrinting("Invalid Input")
+ 		solve(data, all)
+ data['solve']['enable'] = data['solve']['enable'].lower() == "yes"
  file = open("settings.json", "w")
  dump(data, file, indent = 4)
  file.close()
@@ -197,6 +211,7 @@ def solve(data, all):
 def change(data, all):
  data['change'] = input("Toggle Automatically Change Channel (YES/NO): ")
  file = open("settings.json", "w")
+ data['change'] = data['change'].lower() == "yes"
  dump(data, file, indent = 4)
  file.close()
  ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Successfully Saved!")
