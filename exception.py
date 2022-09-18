@@ -1,8 +1,6 @@
 import sys
 from menu import UI
-from colorama import init
 from color import color
-init(convert=True)
 ui = UI()
 def exception(type, value, tback):
 	# manage unhandled exception here
