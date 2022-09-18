@@ -6,8 +6,8 @@ class UI:
 	@classmethod
 	def slowPrinting(cls, text):
 		for letter in text:
-			time.sleep(.0002)
-			print(letter, end="")
+			time.sleep(.002)
+			print(letter, end="", flush=True)
 		print("")
 	@classmethod
 	def logo(cls):
