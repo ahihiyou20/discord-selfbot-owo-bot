@@ -195,7 +195,7 @@ def issuechecker(resp: object) -> str:
 			ui.slowPrinting(f"{color.okcyan}[INFO] {color.reset}Captcha Solver API Is Having An Issue...")
 			return "captcha"
 	if m['channel_id'] == client.channel or m['channel_id'] == client.dmsID and not client.stopped:
-			if m['author']['id'] == client.OwOID or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' and bot.gateway.session.user['username'] in m['content'] and not client.stopped:
+			if (m['author']['id'] == client.OwOID or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456') and bot.gateway.session.user['username'] in m['content'] and not client.stopped:
 				if 'banned' in m['content'].lower() and not client.stopped:
 					ui.slowPrinting(f'{at()}{color.fail} !!! [BANNED] !!! {color.reset} Your Account Have Been Banned From OwO Bot Please Open An Issue On The Support Discord server')
 					return "captcha"
