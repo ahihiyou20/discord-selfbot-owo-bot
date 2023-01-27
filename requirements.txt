@@ -1,0 +1,2 @@
+aiohttp==3.7.4.post0
+discord.py-self==1.9.2
