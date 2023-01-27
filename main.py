@@ -214,7 +214,6 @@ class CaptchaSolver:
             return False
         except Exception as e:
             logger.critical(str(e))
-        finally:
             await self.close()
 
 
