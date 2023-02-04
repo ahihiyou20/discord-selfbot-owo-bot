@@ -682,7 +682,7 @@ ch.setLevel(logging.DEBUG)
 ch.setFormatter(CustomFormatter())
 logger.addHandler(ch)
 
-# Runs The Selfbot
+# Run The Selfbot
 if __name__ == "__main__":
     logging.warning("Loading... Please be patient!")
     client = Client(guild_subscription_options=discord.GuildSubscriptionOptions.off())
