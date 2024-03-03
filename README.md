@@ -2,7 +2,7 @@
 # Discord OwO Selfbot
 
 An Advanced OwO Selfbot Helps You To Earn Cowoncy Automatically!
-
+#### THIS PROJECT HASN'T RECEIVED ANY UPDATES AND BUG FIXING FOR A LONG TIME PLEASE CONSIDER USING ANOTHER PROGRAM
 * ### [Download Lastest Release](https://github.com/ahihiyou20/discord-selfbot-owo-bot/tags)
 [![GitHub issues](https://img.shields.io/github/issues/ahihiyou20/discord-selfbot-owo-bot?label=Open%20%C4%B0ssues)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ahihiyou20/discord-selfbot-owo-bot)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/network)
