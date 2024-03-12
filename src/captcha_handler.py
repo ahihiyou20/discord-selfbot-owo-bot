@@ -51,8 +51,4 @@ async def solve_captcha(token):
                                     "token": result["code"]
                                 },
                                 cookies=cookies) as res:
-            print(result["code"])
             print(res.status)
-
-asyncio.run(
-    solve_captcha("Token"))
