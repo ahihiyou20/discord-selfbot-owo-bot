@@ -51,4 +51,4 @@ async def solve_captcha(token):
                                     "token": result["code"]
                                 },
                                 cookies=cookies) as res:
-            print(res.status)
+            logger.warning(f"Captcha Solved: {res.status}")
