@@ -1,4 +1,3 @@
-import asyncio
 from aiohttp import ClientSession, CookieJar
 
 from logger import logger

@@ -3,9 +3,10 @@ import json
 import threading
 import time
 
-import httpx
+import asyncio
 import qrcode
 import websocket
+from aiohttp import ClientSession
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
@@ -96,11 +97,23 @@ class DiscordAuthWebsocket:
 
     def exchange_ticket(self, ticket):
         print(f'Exch ticket: {ticket}')
-        r = httpx.post(self.LOGIN_ENDPOINT, json={'ticket': ticket})
-        if not r.status_code == 200:
-            return None
 
-        return r.json().get('encrypted_token')
+        async def post():
+            async with ClientSession() as session:
+                async with session.post(self.LOGIN_ENDPOINT, json={'ticket': ticket}) as r:
+                    if not r.status == 200:
+                        print(r.status)
+                        print(await r.json())
+                return (await r.json()).get('encrypted_token')
+
+        _loop = asyncio.new_event_loop()
+
+        _thr = threading.Thread(target=_loop.run_forever,
+                                daemon=True)
+        _thr.start()
+
+        future = asyncio.run_coroutine_threadsafe(post(), _loop)
+        return future.result()
 
     def decrypt_payload(self, encrypted_payload):
         payload = base64.b64decode(encrypted_payload)
@@ -175,3 +188,7 @@ class DiscordAuthWebsocket:
     def on_close(self, ws, status_code, msg):
         print('----------------------')
         print(f'Connection closed: {msg}')
+
+
+auth_ws = DiscordAuthWebsocket(debug=True)
+auth_ws.run()
