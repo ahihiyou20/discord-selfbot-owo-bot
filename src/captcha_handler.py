@@ -1,4 +1,3 @@
-import asyncio
 from twocaptcha import TwoCaptcha
 
 from logger import logger
@@ -51,4 +50,6 @@ async def solve_captcha(token):
                                     "token": result["code"]
                                 },
                                 cookies=cookies) as res:
+            print(await res.json(), res.status)
+            print(str(result))
             logger.warning(f"Captcha Solved: {res.status}")

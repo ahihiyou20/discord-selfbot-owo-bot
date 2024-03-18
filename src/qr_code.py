@@ -54,7 +54,6 @@ class DiscordAuthWebsocket:
                                          on_error=self.on_error,
                                          on_close=self.on_close,
                                          header={'Origin': 'https://discord.com'})
-
         self.key = RSA.generate(2048)
         self.cipher = PKCS1_OAEP.new(self.key, hashAlgo=SHA256)
 
@@ -102,12 +101,12 @@ class DiscordAuthWebsocket:
             async with ClientSession() as session:
                 async with session.post(self.LOGIN_ENDPOINT, json={'ticket': ticket}) as r:
                     if not r.status == 200:
+                        print("HELLOOOOO")
                         print(r.status)
                         print(await r.json())
                 return (await r.json()).get('encrypted_token')
 
         _loop = asyncio.new_event_loop()
-
         _thr = threading.Thread(target=_loop.run_forever,
                                 daemon=True)
         _thr.start()
