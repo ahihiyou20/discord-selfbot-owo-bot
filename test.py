@@ -1,5 +1,3 @@
-import threading
-import asyncio
 import test2
 
 from nicegui import ui
