@@ -47,42 +47,46 @@ with ui.tab_panels(tabs, value=home).classes("w-full"):
 
 
 @ui.page("/new")
-def new_account():
+async def new_account():
     data = {"token": None}
     channels = {}
     guilds = {}
 
     def create_data():
-        data.update({"token": token.value})
-        ui.notify(f"Token: {data['token']}", type='positive')
+        data.update({"token": token.value,
+                     "guild": guild.value})
+        ui.notify(str(data), type='positive')
 
-    def load_account(token: str) -> test2.Client:
+    async def load_account(token: str) -> test2.Client:
         print(token)
 
-        def runner():
-            client = test2.Client()
-            _loop = asyncio.new_event_loop()
-            _thr = threading.Thread(target=_loop.run_forever,
-                                    daemon=True)
-            _thr.start()
+        # def runner():
+        #     client = test2.Client()
+        #     _loop = asyncio.new_event_loop()
+        #     _thr = threading.Thread(target=_loop.run_forever,
+        #                             daemon=True)
+        #     _thr.start()
 
-            future = asyncio.run_coroutine_threadsafe(
-                client.start(token), _loop)
-            return future.result()
+        #     future = asyncio.run_coroutine_threadsafe(
+        #         client.start(token), _loop)
+        #     return future.result()
 
-        runner()
-        guilds, channels = test2.guilds, test2.channels
+        # runner()
+        client = test2.Client()
+        await client.start(token)
+        return test2.guilds, test2.channels
 
     with ui.stepper().props('vertical').classes('w-full') as stepper:
         with ui.step('First, Enter Your Token!'):
             token = ui.input(label='Token', password=True, password_toggle_button=True,
                              validation={'Not a valid Token!': lambda value: search(r"[\w-]{24}\.[\w-]{6}\.[\w-]{38}", value)})
             with ui.stepper_navigation():
-                ui.button('Next', on_click=lambda: (
-                    stepper.next, load_account(token.value)))
+                button = ui.button('Next', on_click=stepper.next)
         with ui.step('Now, Choose Your Preferred Guild!'):
-            ui.select(options=[guild.name for guild in guilds], with_input=True,
-                      on_change=lambda e: ui.notify(e.value)).classes('w-40')
+            await button.clicked()
+            guilds, channels = await load_account(token.value)
+            guild = ui.select(options=[guild.name for guild in guilds], with_input=True,
+                              on_change=lambda e: ui.notify(e.value))
             with ui.stepper_navigation():
                 ui.button('Next', on_click=stepper.next)
                 ui.button('Back', on_click=stepper.previous).props('flat')
