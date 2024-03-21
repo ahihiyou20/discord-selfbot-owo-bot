@@ -1,10 +1,10 @@
-import test2
+import client
 
 from nicegui import ui
 from data2 import Data
 from typing import Type
 from re import search
-
+from client import Client
 
 DARK: ui.dark_mode = ui.dark_mode()
 DATA: Type["Data"] = None
@@ -46,56 +46,48 @@ with ui.tab_panels(tabs, value=home).classes("w-full"):
 
 @ui.page("/new")
 async def new_account():
-    data = {"token": None}
-    channels = {}
-    guilds = {}
+
+    token, guild, channel = (None,)*3
 
     def create_data():
-        data.update({"token": token.value,
-                     "guild": guild.value})
+        data = {"token": token.value,
+                "guild": guild.value,
+                "channel": channel.value}
         ui.notify(str(data), type='positive')
 
-    async def load_account(token: str) -> test2.Client:
+    async def load_account(token: str) -> client.Client:
         print(token)
-
-        # def runner():
-        #     client = test2.Client()
-        #     _loop = asyncio.new_event_loop()
-        #     _thr = threading.Thread(target=_loop.run_forever,
-        #                             daemon=True)
-        #     _thr.start()
-
-        #     future = asyncio.run_coroutine_threadsafe(
-        #         client.start(token), _loop)
-        #     return future.result()
-
-        # runner()
-        client = test2.Client()
+        client = Client(chunk_guilds_at_startup=False, request_guilds=False)
         await client.start(token)
-        return test2.guilds, test2.channels
+        return client.guild_list, client.channel_list
 
-    with ui.stepper().props('vertical').classes('w-full') as stepper:
-        with ui.step('First, Enter Your Token!'):
-            token = ui.input(label='Token', password=True, password_toggle_button=True,
-                             validation={'Not a valid Token!': lambda value: search(r"[\w-]{24}\.[\w-]{6}\.[\w-]{38}", value)})
-            with ui.stepper_navigation():
-                button = ui.button('Next', on_click=stepper.next)
-        with ui.step('Now, Choose Your Preferred Guild!'):
-            await button.clicked()
-            guilds, channels = await load_account(token.value)
-            guild = ui.select(options=[guild.name for guild in guilds], with_input=True,
-                              on_change=lambda e: ui.notify(e.value))
-            with ui.stepper_navigation():
-                ui.button('Next', on_click=stepper.next)
-                ui.button('Back', on_click=stepper.previous).props('flat')
-        with ui.step('Bake'):
-            ui.label('Bake for 20 minutes')
-            with ui.stepper_navigation():
-                ui.button('Done', on_click=lambda: ui.notify(
-                    'Yay!', type='positive'))
-                ui.button('Back', on_click=stepper.previous).props('flat')
+    @ui.refreshable
+    async def main():
+        nonlocal token, guild, channel
+        with ui.stepper().props('vertical').classes('w-full') as stepper:
+            with ui.step('First, Enter Your Token!'):
+                token = ui.input(label='Token', password=True, password_toggle_button=True,
+                                 validation={'Not a valid Token!': lambda value: search(r"[\w-]{24}\.[\w-]{6}\.[\w-]{38}", value)})
+                with ui.stepper_navigation():
+                    button = ui.button('Next', on_click=stepper.next)
 
-    ui.button("Save").on("click", lambda: create_data())
+            with ui.step('Now, Choose Your Preferred Guild!'):
+                await button.clicked()
+                guilds, channels = await load_account(token.value)
+                guild = ui.select(options=[guild.name for guild in guilds], with_input=True,
+                                  on_change=lambda e: ui.notify(e.value))
+                with ui.stepper_navigation():
+                    button = ui.button('Next', on_click=stepper.next)
 
+            with ui.step('Finally, Choose Your Channel!'):
+                await button.clicked()
+                channel = ui.select(options=[channel.name for channel in channels[guild.value]], with_input=True,
+                                    on_change=lambda e: ui.notify(e.value))
+
+                with ui.stepper_navigation():
+                    ui.button("Done", on_click=create_data)
+
+    ui.button("Refresh", on_click=main.refresh)
+    await main()
 
 ui.run()
