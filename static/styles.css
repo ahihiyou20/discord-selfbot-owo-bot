@@ -1,0 +1,110 @@
+body {
+  box-sizing: border-box;
+  font-family: "Minecraft", sans-serif;
+  padding: 0;
+  margin: 0;
+  background-image: url("https://r4.wallpaperflare.com/wallpaper/77/395/701/pixel-art-andlt-aestheticandgt-town-city-waneella-hd-wallpaper-16afb7bd0dcf0939c31e6ab1f00dc4fb.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.644);
+  }
+}
+
+/* --------------------------------- */
+
+/* TASKBAR CSS  */
+
+.q-tabs__content {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  max-width: 300px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px !important ;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+.q-tab__indicator {
+  display: none;
+}
+
+.tabs-box {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+}
+
+.tab-item {
+  margin: 0px 5px;
+  border: 1px solid #ffc0cb;
+  border-radius: 50%;
+  color: white;
+  &:hover {
+    background: pink;
+    color: black;
+  }
+}
+.q-tab__label {
+  font-size: 9px;
+}
+
+.q-tab--active {
+  background: pink;
+  color: black;
+}
+
+/* ------------------------- */
+/* TABS PANELS CONTENT CSS */
+
+.q-tab-panels {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px !important ;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+.tab-panel-content {
+  background: black;
+}
+.tab-panel-title {
+  font-size: 35px;
+}
+
+
+
