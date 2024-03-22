@@ -5,7 +5,6 @@ body {
   margin: 0;
   background-image: url("https://r4.wallpaperflare.com/wallpaper/77/395/701/pixel-art-andlt-aestheticandgt-town-city-waneella-hd-wallpaper-16afb7bd0dcf0939c31e6ab1f00dc4fb.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
   object-fit: cover;
   &::before {
@@ -17,6 +16,15 @@ body {
     right: 0;
     background-color: rgba(0, 0, 0, 0.644);
   }
+}
+
+.q-body--prevent-scroll {
+  position: relative !important;
+}
+
+.q-scrollarea__thumb {
+  background: #ff0000;
+  border-radius: 99px;
 }
 
 /* --------------------------------- */
@@ -124,16 +132,39 @@ body {
 }
 
 .q-card {
+  position: relative;
   text-align: center;
-  background: transparent;
-  box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  background:rgba(0,0,0,0.3);
   border-radius: 10px !important;
   border: 1px solid rgba(255, 255, 255, 0.18);
   transition: 0.3s ease-in-out;
+  overflow: hidden;
   &:hover {
     box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
     border: 1px solid rgb(253, 168, 218);
   }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    width: 100%;
+    background: pink;
+    transition: 0.3s ease-in-out;
+  }
+}
+.q-card:hover:before {
+  height: 5px;
+}
+
+.q-btn {
+  color: pink !important;
+}
+
+.q-btn--outline:before {
+  border: 1px solid pink;
 }
 
 /* ------------------------------------ */
