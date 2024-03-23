@@ -78,4 +78,4 @@ class Data:
         with open("config2.json", "r") as f:
             data = [account for account in load(f)]
             data.append("new")
-            return [account for account in data]
+            return data
