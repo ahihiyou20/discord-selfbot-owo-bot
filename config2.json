@@ -1,14 +1,1 @@
-{
-    "default": {
-        "token": null,
-        "channel": null,
-        "gem": false,
-        "pray": false,
-        "exp": false,
-        "webhook": false,
-        "commands": false,
-        "daily": false,
-        "sell": false,
-        "solve": false
-    }
-}
+{}

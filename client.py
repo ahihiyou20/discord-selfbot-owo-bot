@@ -7,14 +7,9 @@ class Client(discord.Client):
 
     async def on_ready(self):
         print(f"Logged on as {self.user}!")
-        self.guild_list = [guild for guild in self.guilds]
 
-        self.channel_list = {
-            guild.name: [
-                channel for channel in guild.channels
-                if isinstance(
-                    channel, discord.TextChannel)]
-            for guild in self.guilds}
+        # self.channels = {channel.guild: channel for channel in self.get_all_channels()
+        #                  if channel.permissions_for(self.user).send_messages}
 
         await self.close()
 
