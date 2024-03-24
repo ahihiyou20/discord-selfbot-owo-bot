@@ -16,6 +16,8 @@ class Data:
         # Name of the account
         self.name = None
 
+        # URL To The Avatar
+        self.avatar = None
         # Token for the account
         self.token = None
 
@@ -39,8 +41,6 @@ class Data:
         # Load the configuration data from the JSON file
         with open("config2.json", "r") as f:
             self.data = load(f)
-            if not self.data:
-                raise ValueError("No data found in config.json")
 
         # Set the attributes of the class based on the configuration data
 
@@ -76,6 +76,4 @@ class Data:
         """
 
         with open("config2.json", "r") as f:
-            data = [account for account in load(f)]
-            data.append("new")
-            return data
+            return [account for account in load(f)]

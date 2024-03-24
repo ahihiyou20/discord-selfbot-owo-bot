@@ -1,7 +1,7 @@
 import base64
 import json
-import threading
 import time
+import threading
 
 import asyncio
 import qrcode
@@ -106,13 +106,7 @@ class DiscordAuthWebsocket:
                         print(await r.json())
                 return (await r.json()).get('encrypted_token')
 
-        _loop = asyncio.new_event_loop()
-        _thr = threading.Thread(target=_loop.run_forever,
-                                daemon=True)
-        _thr.start()
-
-        future = asyncio.run_coroutine_threadsafe(post(), _loop)
-        return future.result()
+        return asyncio.run(post())
 
     def decrypt_payload(self, encrypted_payload):
         payload = base64.b64decode(encrypted_payload)
