@@ -14,7 +14,7 @@ app.add_static_files("/static", "static")
 
 ui.add_head_html(
     """ 
-                    <link rel='stylesheet' type="text/css" href="/static/styles.css">
+                    <link rel='stylesheet' type="text/css" href="/static/style.css">
                    
                     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
                     
