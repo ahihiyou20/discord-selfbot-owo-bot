@@ -1,31 +1,33 @@
-body {
-    box-sizing: border-box;
-    font-family: "Minecraft", sans-serif;
-    padding: 0;
-    margin: 0;
-    background-image: url("https://r4.wallpaperflare.com/wallpaper/77/395/701/pixel-art-andlt-aestheticandgt-town-city-waneella-hd-wallpaper-16afb7bd0dcf0939c31e6ab1f00dc4fb.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    object-fit: cover;
+:root {
+  --primary-color: pink;
+  --box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+}
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.644);
-    }
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background-image: url("https://r4.wallpaperflare.com/wallpaper/77/395/701/pixel-art-andlt-aestheticandgt-town-city-waneella-hd-wallpaper-16afb7bd0dcf0939c31e6ab1f00dc4fb.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  font-family: "Prompt", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.644);
+  }
 }
 
 .q-body--prevent-scroll {
-    position: relative !important;
-}
-
-.q-scrollarea__thumb {
-    background: #ff0000;
-    border-radius: 99px;
+  position: relative !important;
 }
 
 /* --------------------------------- */
@@ -33,160 +35,247 @@ body {
 /* TASKBAR CSS  */
 
 .q-tabs__content {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    max-width: 300px;
-    padding: 5px 10px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    justify-content: center;
-    transition: 0.3s ease-in-out;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  max-width: 300px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 99px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  justify-content: center;
+  transition: 0.3s ease-in-out;
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.4);
-        box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 10px !important;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-    }
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 99px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
 }
 
 .q-tab__indicator {
-    display: none;
+  display: none;
 }
 
 .tabs-box {
-    display: flex;
-    justify-content: center;
-    background: transparent;
+  display: flex;
+  justify-content: center;
+  background: transparent;
 }
 
 .tab-item {
-    margin: 0px 5px;
-    border: 1px solid #ffc0cb;
-    border-radius: 50%;
-    color: white;
+  margin: 0px 5px;
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+  color: white;
 
-    &:hover {
-        background: pink;
-        color: black;
-    }
+  &:hover {
+    background: var(--primary-color);
+    color: black;
+  }
 }
 
 .q-tab__label {
-    font-size: 9px;
+  font-size: 9px;
 }
 
 .q-tab--active {
-    background: pink;
-    color: black;
+  background: var(--primary-color);
+  color: black;
 }
 
 /* ------------------------- */
 /* TABS PANELS CONTENT CSS */
 
 .q-tab-panels {
-    color: white;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .tab-panel-content {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .tab-panel-title {
-    font-size: 30px;
-    display: inline-block;
-    position: relative;
-    transition: 0.3s ease;
+  font-size: 30px;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s ease;
 
-    &::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 5px;
-        background: pink;
-        transform: scale(0);
-        border-radius: 10px;
-        animation: animate 2s infinite;
-    }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-color);
+    transform: scale(0);
+    border-radius: 10px;
+    animation: animate 2s infinite;
+  }
 }
 
 .cards-layout {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .q-card {
-    position: relative;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgb(253, 168, 218);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--primary-color);
     transition: 0.3s ease-in-out;
-    overflow: hidden;
-
-    &:hover {
-        box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
-        border: 1px solid rgb(253, 168, 218);
-    }
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        width: 100%;
-        background: pink;
-        transition: 0.3s ease-in-out;
-    }
+  }
 }
 
 .q-card:hover:before {
-    height: 5px;
+  height: 5px;
 }
 
 .q-btn {
-    color: pink !important;
+  color: var(--primary-color) !important;
 }
 
 .q-btn--outline:before {
-    border: 1px solid pink;
+  border: 1px solid var(--primary-color);
 }
+
+.add-button {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: transparent !important;
+  transition: 0.3s ease-in-out;
+  animation: animate2 2s infinite;
+}
+
+/* ----------------------------------------- */
+/* DIALOG */
+.q-stepper {
+  scrollbar-width: none;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--box-shadow);
+  border: 1px solid rgb(253, 168, 218);
+  border-radius: 10px !important;
+}
+
+.q-stepper__tab {
+  color: white;
+}
+
+.q-stepper__dot {
+  background: transparent;
+  border: 1px solid rgb(253, 168, 218);
+}
+.q-field__input {
+  color: white;
+}
+.q-field__label {
+  color: white;
+}
+.q-field__append {
+  color: white;
+}
+.q-field__native {
+  color: white;
+}
+.q-field__control {
+  color: var(--primary-color) !important;
+}
+
+.q-menu {
+  color: white;
+  background: transparent;
+  scrollbar-width: none;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--box-shadow);
+  border: 1px solid rgb(253, 168, 218);
+  border-radius: 10px !important;
+}
+
+.q-card-features {
+  color: white;
+  scrollbar-width: none;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--box-shadow);
+  border: 1px solid rgb(253, 168, 218);
+}
+
+.q-checkbox__inner--truthy {
+  color: var(--primary-color);
+}
+.q-item--active {
+  color: var(--primary-color);
+}
+
+/* ------------------------------------------ */
+/* LOGIN NOTIFY */
 
 /* ------------------------------------ */
 @keyframes animate {
-    0% {
-        transform: scale(0);
-    }
+  0% {
+    transform: scale(0);
+  }
 
-    50% {
-        transform: scale(1);
-    }
+  50% {
+    transform: scale(1);
+  }
 
-    100% {
-        transform: scale(0);
-    }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
+    border: 1px solid transparent;
+  }
+  50% {
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgb(253, 168, 218);
+  }
+  100% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
+    border: 1px solid transparent;
+  }
 }
