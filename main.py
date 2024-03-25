@@ -35,11 +35,14 @@ def select_account():
     with ui.card():
         if DATA.name:
             ui.label(DATA.name)
-            with ui.splitter() as splitter:
-                with splitter.before:
-                    ui.label("PLACE HOLDER")
-                with splitter.after:
-                    ui.label("PLACE HOLDER")
+            with ui.card_section():
+                with ui.splitter() as splitter:
+                    with splitter.before:
+                        ui.label("PLACE HOLDER")
+                    with splitter.after:
+                        for _ in range(5):
+                            with ui.card():
+                                ui.label("PLACE HOLDER")
         else:
             ui.label("No Account Selected")
 
