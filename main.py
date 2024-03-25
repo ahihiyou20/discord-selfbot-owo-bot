@@ -41,7 +41,7 @@ def select_account():
                         ui.label("PLACE HOLDER")
                     with splitter.after:
                         for _ in range(5):
-                            ui.label("place holder")
+                            ui.label("PLACE HOLDER")
         else:
             ui.label("No Account Selected")
 
