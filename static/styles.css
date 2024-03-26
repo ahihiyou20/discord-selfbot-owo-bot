@@ -206,18 +206,23 @@ body {
   background: transparent;
   border: 1px solid rgb(253, 168, 218);
 }
+
 .q-field__input {
   color: white;
 }
+
 .q-field__label {
   color: white;
 }
+
 .q-field__append {
   color: white;
 }
+
 .q-field__native {
   color: white;
 }
+
 .q-field__control {
   color: var(--primary-color) !important;
 }
@@ -243,6 +248,7 @@ body {
 .q-checkbox__inner--truthy {
   color: var(--primary-color);
 }
+
 .q-item--active {
   color: var(--primary-color);
 }
@@ -270,10 +276,12 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
     border: 1px solid transparent;
   }
+
   50% {
     box-shadow: var(--box-shadow);
     border: 1px solid rgb(253, 168, 218);
   }
+
   100% {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
     border: 1px solid transparent;

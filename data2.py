@@ -67,6 +67,18 @@ class Data:
 
         return self
 
+    def remove(self, account: str) -> None:
+        """
+        Remove account data from file.
+
+        :param account: str - the account to remove data for
+        :return: None
+        """
+        self.data.pop(account, None)
+
+        with open("config2.json", 'w') as f:
+            dump(self.data, f, ensure_ascii=False, indent=4)
+
     @staticmethod
     def get_account() -> dict:
         """
