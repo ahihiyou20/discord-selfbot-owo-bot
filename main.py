@@ -32,16 +32,26 @@ ui.add_head_html(
 
 @ui.refreshable
 def select_account():
-    with ui.card():
+    with ui.card().classes("q-card-info"):
         if DATA.name:
-            ui.label(DATA.name)
-            with ui.card_section():
-                with ui.splitter() as splitter:
-                    with splitter.before:
-                        ui.label("PLACE HOLDER")
-                    with splitter.after:
-                        for _ in range(5):
-                            ui.label("PLACE HOLDER")
+            # ui.label(DATA.name)
+            with ui.card_section().classes("p-0"):
+                with ui.element("div").classes("info-container"):
+                    with ui.element("div").classes("user-info"):
+                        with ui.avatar(size="100px", color="grey"):
+                            ui.image()
+                        ui.label("username")
+                    ui.element("div").classes("seperator")
+                    with ui.element("div").classes("user-status"):
+                        for _ in range(3):
+                            ui.label("something")
+
+            #     with ui.splitter() as splitter:
+            #         with splitter.before:
+            #             ui.label("PLACE HOLDER")
+            #         with splitter.after:
+            #             for _ in range(2):
+            #                 ui.label("PLACE HOLDER")
         else:
             ui.label("No Account Selected")
 
@@ -49,24 +59,28 @@ def select_account():
 @ui.refreshable
 def show_account():
     for account in Data.get_account():
-        with ui.card():
-            ui.label(account)
-            with ui.card_section():
+        with ui.card().classes("q-card-select"):
+            ui.label(account).classes("w-full")
+            with ui.card_section().classes("p-0"):
                 ui.button(
                     text="Select",
                     icon="send",
                     on_click=lambda account=account: (
-                        DATA.load(account), select_account.refresh(), ui.notify(
-                            "Account Loaded!", type="positive")
+                        DATA.load(account),
+                        select_account.refresh(),
+                        ui.notify("Account Loaded!", type="positive"),
                     ),
                 ).props("outline")
 
-                ui.button(text="Remove", icon="delete",
-                          on_click=lambda account=account: (
-                              DATA.remove(account),
-                              show_account.refresh(),
-                              ui.notify("Account Removed!", type="positive"))
-                          ).props("outline")
+                ui.button(
+                    text="Remove",
+                    icon="delete",
+                    on_click=lambda account=account: (
+                        DATA.remove(account),
+                        show_account.refresh(),
+                        ui.notify("Account Removed!", type="positive"),
+                    ),
+                ).props("outline")
 
 
 with ui.tabs().classes("main-tabs") as tabs:
@@ -81,8 +95,7 @@ with ui.tab_panels(tabs, value="h").classes("w-full"):
 
         with ui.element("div").classes("cards-layout"):
             show_account()
-            ui.button(icon="add", on_click=lambda: new_account()
-                      ).classes("add-button")
+            ui.button(icon="add", on_click=lambda: new_account()).classes("add-button")
 
         with ui.element("div").classes("tab-panel-content"):
             ui.label("ACCOUNT INFO").classes("tab-panel-title")
@@ -136,8 +149,7 @@ def new_account():
             "commands": commands.value if commands.value else None,
             "daily": daily.value,
             "sell": (
-                sell.value if (not sell.value) or (
-                    not "All" in sell.value) else "All"
+                sell.value if (not sell.value) or (not "All" in sell.value) else "All"
             ),
             "solve": solve.value,
         }
@@ -178,8 +190,7 @@ def new_account():
             with stepper:
                 with ui.step("Now, Choose Your Preferred Guild!") as step:
                     guild = ui.select(
-                        options={
-                            guild.id: guild.name for guild in client.guilds},
+                        options={guild.id: guild.name for guild in client.guilds},
                         with_input=True,
                         on_change=lambda e: ui.notify(e.value),
                     )
@@ -223,8 +234,7 @@ def new_account():
                         with ui.card().classes("w-full q-card-features"):
                             gem = ui.checkbox("Use Gems Automatically")
                             pray = ui.checkbox("Pray Automatically")
-                            exp = ui.checkbox(
-                                "Send Messages To Level Up Automatically")
+                            exp = ui.checkbox("Send Messages To Level Up Automatically")
                             daily = ui.checkbox("Claim Daily Automatically")
                             solve = ui.checkbox("Enable Captcha Solving")
                             with ui.expansion(
@@ -258,8 +268,7 @@ def new_account():
                             with ui.expansion(
                                 "Selfbot Commands", icon="settings_applications"
                             ).classes("w-full"):
-                                checkbox = ui.checkbox(
-                                    "Enable Selfbot Commands")
+                                checkbox = ui.checkbox("Enable Selfbot Commands")
 
                                 commands = ui.input(
                                     "Enter Selfbot Prefix",
@@ -274,8 +283,7 @@ def new_account():
                             with ui.expansion(
                                 "Sell Animals", icon="settings_applications"
                             ).classes("w-full"):
-                                checkbox = ui.checkbox(
-                                    "Enable Selling Animals")
+                                checkbox = ui.checkbox("Enable Selling Animals")
 
                                 sell = (
                                     ui.select(

@@ -139,7 +139,7 @@ body {
   gap: 10px;
 }
 
-.q-card {
+.q-card-select {
   position: relative;
   text-align: center;
   background: rgba(0, 0, 0, 0.3);
@@ -164,6 +164,44 @@ body {
     background: var(--primary-color);
     transition: 0.3s ease-in-out;
   }
+}
+.q-card-select .q-card__section {
+  display: flex;
+  gap: 10px;
+}
+
+.q-card-info {
+  position: relative;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px !important;
+  border: 1px solid rgb(253, 168, 218);
+  overflow: hidden;
+}
+
+.info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.q-avatar {
+  border: 2px solid transparent;
+  transition: 0.3s ease-in-out;
+  animation: animate3 2s infinite;
+}
+
+.info-container .seperator {
+  width: 2px;
+  min-height: 150px;
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.info-container .user-status {
+  text-align: justify;
+  flex-wrap: nowrap;
 }
 
 .q-card:hover:before {
@@ -240,9 +278,13 @@ body {
 .q-card-features {
   color: white;
   scrollbar-width: none;
-  backdrop-filter: blur(10px);
+  background: transparent;
   box-shadow: var(--box-shadow);
   border: 1px solid rgb(253, 168, 218);
+}
+
+.q-item__section--side > .q-icon {
+  color: white;
 }
 
 .q-checkbox__inner--truthy {
@@ -286,4 +328,16 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
     border: 1px solid transparent;
   }
+}
+
+@keyframes animate3 {
+ 0% {
+  border: 2px solid white;
+ }
+ 50% {
+  border: 2px solid var(--primary-color);
+ }
+ 100% {
+  border: 2px solid white;
+ }
 }
