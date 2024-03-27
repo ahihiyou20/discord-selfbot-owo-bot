@@ -395,10 +395,13 @@ body {
 }
 
 @keyframes animate4 {
-  from {
-    transform: rotate(0deg);
+  0% {
+    transform: rotate(45deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(315deg);
+  }
+  100% {
+    transform: rotate(45deg);
   }
 }
