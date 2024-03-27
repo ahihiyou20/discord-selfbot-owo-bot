@@ -1,6 +1,7 @@
 :root {
   --primary-color: pink;
   --box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+  --user-info-box-color: #ffc0c0;
 }
 
 body {
@@ -104,6 +105,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.q-panel {
+  scrollbar-width: none;
+}
+
 .tab-panel-content {
   width: 100%;
   text-align: center;
@@ -168,9 +173,11 @@ body {
 .q-card-select .q-card__section {
   display: flex;
   gap: 10px;
+  flex-direction: column;
 }
 
 .q-card-info {
+  width: 1000px;
   position: relative;
   text-align: center;
   background: rgba(0, 0, 0, 0.3);
@@ -178,18 +185,62 @@ body {
   border: 1px solid rgb(253, 168, 218);
   overflow: hidden;
 }
+.q-card-info .q-card__section {
+  width: 100%;
+}
+
+#c25 {
+  width: 100%;
+  text-align: center;
+}
 
 .info-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
+  width: 100%;
+}
+
+.info-container .user-info {
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 180%;
+    z-index: 0;
+    background: var(--primary-color);
+    transform: rotate(45deg);
+    transition: 0.3s ease-in-out;
+    animation: animate4 2s infinite;
+  }
+  &::after {
+    border-radius: 10px;
+    z-index: 1;
+    content: "";
+    position: absolute;
+    background: var(--user-info-box-color);
+    inset: 5px;
+  }
 }
 
 .q-avatar {
+  z-index: 10;
   border: 2px solid transparent;
   transition: 0.3s ease-in-out;
   animation: animate3 2s infinite;
+}
+
+.user-info .q-username {
+  z-index: 10;
 }
 
 .info-container .seperator {
@@ -200,6 +251,7 @@ body {
 }
 
 .info-container .user-status {
+  width: 70%;
   text-align: justify;
   flex-wrap: nowrap;
 }
@@ -331,13 +383,22 @@ body {
 }
 
 @keyframes animate3 {
- 0% {
-  border: 2px solid white;
- }
- 50% {
-  border: 2px solid var(--primary-color);
- }
- 100% {
-  border: 2px solid white;
- }
+  0% {
+    border: 2px solid white;
+  }
+  50% {
+    border: 2px solid var(--primary-color);
+  }
+  100% {
+    border: 2px solid white;
+  }
+}
+
+@keyframes animate4 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

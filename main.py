@@ -32,19 +32,21 @@ ui.add_head_html(
 
 @ui.refreshable
 def select_account():
-    with ui.card().classes("q-card-info"):
+    with ui.card().classes("animate__animated animate__flipInX q-card-info"):
         if DATA.name:
             # ui.label(DATA.name)
             with ui.card_section().classes("p-0"):
                 with ui.element("div").classes("info-container"):
                     with ui.element("div").classes("user-info"):
-                        with ui.avatar(size="100px", color="grey"):
+                        with ui.avatar(size="150px", color="grey"):
                             ui.image()
-                        ui.label("username")
+                        ui.label("username").classes("q-username text-h4")
                     ui.element("div").classes("seperator")
                     with ui.element("div").classes("user-status"):
-                        for _ in range(3):
-                            ui.label("something")
+                        ui.label("status 1:")
+                        ui.label("status 2:")
+                        ui.label("status 3:")
+                        ui.label("status 4:")
 
             #     with ui.splitter() as splitter:
             #         with splitter.before:
@@ -61,7 +63,7 @@ def show_account():
     for account in Data.get_account():
         with ui.card().classes("q-card-select"):
             ui.label(account).classes("w-full")
-            with ui.card_section().classes("p-0"):
+            with ui.card_section().classes("btn-section p-0"):
                 ui.button(
                     text="Select",
                     icon="send",
