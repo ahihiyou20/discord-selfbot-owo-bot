@@ -48,7 +48,7 @@ class Data:
         for key, value in self.data[account].items():
             setattr(self, key, value)
 
-        self.name = self.data[account]
+        self.name = account
 
         return self
 

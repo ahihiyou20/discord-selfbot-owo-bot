@@ -7,6 +7,7 @@ from typing import Type
 from re import search
 from client import TempClient
 from asyncio import sleep
+from functools import partial
 
 DATA: Type["Data"] = Data()
 
@@ -30,43 +31,83 @@ ui.add_head_html(
 )
 
 
+async def load_account(token: str) -> TempClient:
+    print(token)
+
+    if not search(r"[\w-]{24}\.[\w-]{6}\.[\w-]{38}", token):
+        raise LoginFailure
+
+    ui.notify("Logging In...", type="positive")
+    client = TempClient(max_messages=None, guild_subscriptions=False)
+    await client.start(token)
+
+    return client
+
+
 @ui.refreshable
-def select_account():
-    with ui.card():
-        if DATA.name:
-            ui.label(DATA.name)
-            with ui.card_section():
-                with ui.splitter() as splitter:
-                    with splitter.before:
-                        ui.label("PLACE HOLDER")
-                    with splitter.after:
-                        for _ in range(5):
-                            ui.label("PLACE HOLDER")
+def info_account(client=None):
+    with ui.card().classes("animate__animated animate__flipInX q-card-info"):
+        if client:
+            # ui.label(DATA.name)
+            with ui.card_section().classes("p-0"):
+                with ui.element("div").classes("info-container"):
+                    with ui.element("div").classes("user-info"):
+                        with ui.avatar(size="150px", color="grey"):
+                            ui.image(client.user.display_avatar.url)
+                        ui.label(client.user.name).classes(
+                            "q-username text-h4")
+                    ui.element("div").classes("seperator")
+                    with ui.element("div").classes("user-status"):
+                        ui.label(f"User ID: {client.user.id}")
+                        ui.label(f"Email: {client.user.email}")
+                        ui.label(f"MFA Enabled: {client.user.mfa_enabled}")
+                        ui.label(f"Created At: {
+                                 client.user.created_at.strftime("%m/%d/%Y, %H:%M:%S")}")
+                        ui.label(f"Guild: {client.get_guild(DATA.guild).name}")
+                        ui.label(
+                            f"Channel: {client.get_channel(DATA.channel).name}")
+
+            #     with ui.splitter() as splitter:
+            #         with splitter.before:
+            #             ui.label("PLACE HOLDER")
+            #         with splitter.after:
+            #             for _ in range(2):
+            #                 ui.label("PLACE HOLDER")
         else:
             ui.label("No Account Selected")
 
 
 @ui.refreshable
 def show_account():
+    async def load_event(account):
+        DATA.load(account)
+        client = await load_account(DATA.token)
+        info_account.refresh(client)
+
+    async def remove_event(account):
+        DATA.remove(account)
+        show_account.refresh()
+
+        if DATA.name == account:
+            print("YES?")
+            info_account.refresh(None)
+        ui.notify("Account Removed!", type="positive")
+
     for account in Data.get_account():
-        with ui.card():
-            ui.label(account)
-            with ui.card_section():
+        with ui.card().classes("q-card-select"):
+            ui.label(account).classes("w-full")
+            with ui.card_section().classes("btn-section p-0"):
                 ui.button(
                     text="Select",
                     icon="send",
-                    on_click=lambda account=account: (
-                        DATA.load(account), select_account.refresh(), ui.notify(
-                            "Account Loaded!", type="positive")
-                    ),
+                    on_click=partial(load_event, account),
                 ).props("outline")
 
-                ui.button(text="Remove", icon="delete",
-                          on_click=lambda account=account: (
-                              DATA.remove(account),
-                              show_account.refresh(),
-                              ui.notify("Account Removed!", type="positive"))
-                          ).props("outline")
+                ui.button(
+                    text="Remove",
+                    icon="delete",
+                    on_click=partial(remove_event, account),
+                ).props("outline")
 
 
 with ui.tabs().classes("main-tabs") as tabs:
@@ -88,7 +129,7 @@ with ui.tab_panels(tabs, value="h").classes("w-full"):
             ui.label("ACCOUNT INFO").classes("tab-panel-title")
 
         with ui.element("div").classes("cards-layout"):
-            select_account()
+            info_account()
 
     with ui.tab_panel("a"):
         with ui.element("div").classes("tab-panel-content"):
@@ -147,18 +188,6 @@ def new_account():
         show_account.refresh()
         dialog.close()
 
-    async def load_account(token: str) -> TempClient:
-        print(token)
-
-        if not search(r"[\w-]{24}\.[\w-]{6}\.[\w-]{38}", token):
-            raise LoginFailure
-
-        ui.notify("Logging In...", type="positive")
-        client = TempClient(max_messages=None, guild_subscriptions=False)
-        await client.start(token)
-
-        return client
-
     async def get_guild(button):
         if stepper.default_slot.children:
             nonlocal guild
@@ -184,7 +213,7 @@ def new_account():
                         on_change=lambda e: ui.notify(e.value),
                     )
                     with ui.stepper_navigation():
-                        ui.button("Next", on_click=lambda: get_channel(client)).props(
+                        ui.button("Next", on_click=partial(get_channel, client)).props(
                             "outline"
                         )
                 step.move(target_index=1)
@@ -208,7 +237,7 @@ def new_account():
                     )
 
                     with ui.stepper_navigation():
-                        ui.button("Next", on_click=lambda: get_features(client)).props(
+                        ui.button("Next", on_click=partial(get_features, client)).props(
                             "outline"
                         )
                 step.move(target_index=2)
@@ -307,7 +336,7 @@ def new_account():
                                 )
 
                             ui.button(
-                                "Done!", on_click=lambda: create_data(client)
+                                "Done!", on_click=partial(create_data, client)
                             ).props("outline")
                 step.move(target_index=3)
         stepper.next()
